@@ -11,6 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
 {
+
+    const GENDER_NAMES = [
+        "Non-défini",
+        "Femme",
+        "Homme"
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -61,6 +68,9 @@ class Employee
     public function __construct()
     {
         $this->cards = new ArrayCollection();
+        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setIsPolice(false);
+        $this->setGender(0);
     }
 
     public function getId(): ?int
@@ -253,4 +263,10 @@ class Employee
 
         return $this;
     }
+
+    public function getGenderName(): string
+    {
+        return self::GENDER_NAMES[$this->getGender()];
+    }
+
 }

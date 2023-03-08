@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee index{% endblock %}
+
+{% block body %}
+    <h1>Employee index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Badge_number</th>
+                <th>Birthdate</th>
+                <th>Phone_number</th>
+                <th>Email</th>
+                <th>IsPolice</th>
+                <th>Picture</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>Gender</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.firstname }}</td>
+                <td>{{ employee.lastname }}</td>
+                <td>{{ employee.badgeNumber }}</td>
+                <td>{{ employee.birthdate ? employee.birthdate|date('Y-m-d') : '' }}</td>
+                <td>{{ employee.phoneNumber }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.isPolice ? 'Yes' : 'No' }}</td>
+                <td>{{ employee.picture }}</td>
+                <td>{{ employee.createdAt ? employee.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ employee.updatedAt ? employee.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ employee.gender }}</td>
+                <td>
+                    <a href="{{ path('app.employee.show', {'id': employee.id}) }}">show</a>
+                    <a href="{{ path('app.employee.edit', {'id': employee.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app.employee.new') }}">Create new</a>
+{% endblock %}
