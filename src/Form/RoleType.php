@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Data\RankData;
+use App\Data\RoleData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RankType extends AbstractType
+class RoleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -22,7 +22,7 @@ class RankType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => RankData::class,
+            'data_class' => RoleData::class,
         ]);
     }
 }

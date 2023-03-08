@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Data\RankData;
+use App\Data\RoleData;
 use App\Repository\RoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,6 +30,41 @@ class Role
     public function __construct()
     {
         $this->employees = new ArrayCollection();
+    }
+
+    public static function createFromData(RoleData $data): self
+    {
+        return (new Role())
+            ->setName($data->getName())
+            ->setValue([
+                $data->getNonDefined(),
+                $data->getFemale(),
+                $data->getMale()
+            ])
+            ;
+    }
+
+    public function updateFromData(RoleData $data): self
+    {
+        $this
+            ->setName($data->getName())
+            ->setValue([
+                $data->getNonDefined(),
+                $data->getFemale(),
+                $data->getMale()
+            ]);
+
+        return $this;
+    }
+
+    public function getRoleData(): RoleData
+    {
+        return (new RoleData())
+            ->setName($this->getName())
+            ->setNonDefined($this->getValue()[0] ?? '')
+            ->setFemale($this->getValue()[1] ?? '')
+            ->setMale($this->getValue()[2] ?? '')
+            ;
     }
 
     public function getId(): ?int

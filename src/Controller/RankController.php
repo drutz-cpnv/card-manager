@@ -36,7 +36,6 @@ class RankController extends AbstractController
         }
 
         return $this->renderForm('rank/new.html.twig', [
-            'rank' => $rankData,
             'form' => $form,
         ]);
     }
@@ -52,11 +51,12 @@ class RankController extends AbstractController
     #[Route('/{id}/modifier', name: 'app.rank.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Rank $rank, RankRepository $rankRepository): Response
     {
-        $form = $this->createForm(RankType::class, $rank->getRankData());
+        $data = $rank->getRankData();
+        $form = $this->createForm(RankType::class, $data);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $rankRepository->save($rank, true);
+            $rankRepository->save($rank->updateFromData($data), true);
 
             return $this->redirectToRoute('app.rank.index', [], Response::HTTP_SEE_OTHER);
         }
