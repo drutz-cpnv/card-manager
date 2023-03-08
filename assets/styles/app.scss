@@ -1,0 +1,32 @@
+@import "vars";
+
+
+@import "reset";
+@import "functions";
+@import "responsive";
+@import "global";
+@import "typography";
+@import "layouts";
+@import "formatted";
+@import "components/components";
+@import "components/form";
+
+body{
+  height: 100vh;
+  //background-color: var(--background);
+  background-attachment: fixed;
+  background-color: var(--background);
+  background-image: radial-gradient(var(--bg-dot) 1px, transparent 0);
+  background-size: 15px 15px;
+  word-break: break-word;
+}
+
+.bodyLight{
+}
+
+
+
+
+@import "pages/version";
+@import "pages/scannPage";
+

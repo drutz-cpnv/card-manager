@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gestionnaire des cartes de police{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body{{ isErrorPage is defined ? ' class="error-page"' : '' }}>
+<div class="page-warper">
+    {{ include('components/_header.html.twig') }}
+    <main>
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+</div>
+{#{% if has_logo is defined %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="520.562" height="840.756" viewBox="0 0 520.562 840.756" id="filigran_logo">
+            <g id="Calque_9" opacity="0.08">
+                <path id="Tracé_3" data-name="Tracé 3" d="M326.7,609.279,456.127,737.9,353.908,840.756l-214.494-213.1L0,489.118H203.5c.942,0,1.85,0,2.774-.017,93.744-1.5,169.278-77.972,169.278-172.019A172.055,172.055,0,0,0,203.5,145.014H175.836V1.211Q182.7.58,189.658.336C194.231.1,198.856,0,203.5,0,378.626,0,520.562,141.953,520.562,317.066,520.562,448.459,440.607,561.188,326.7,609.279Z" transform="translate(0 0)" fill="#0652dd"/>
+            </g>
+        </svg>
+    {% endif %}#}
+
+<div class="notifications">
+    {% for flash in app.flashes("notification") %}
+        {% if flash.content is defined %}
+            <div class="flash" id="{{ flash.id }}" data-flash data-title="{{ flash.title ?? "" }}" data-content="{{ flash.content }}" data-duration="{{ flash.duration ?? "" }}">
+                <span>{{ flash.content }}</span>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+</body>
 </html>

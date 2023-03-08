@@ -1,0 +1,19 @@
+<header>
+    <div class="container flex">
+        <div>
+            {% if error is defined and error is not same as(null) %}
+                {% if error is not same as(null) %}
+            <div class="header__error">
+                <h1 class="h1">HTTP/2 {{ error.code }}</h1>
+                <h2 class="h2">{{ error.desc }} <span class="blink">▉</span></h2>
+            </div>
+                    {% endif %}
+            {% else %}
+            <a href="/" class="header__logo">
+                <i data-feather="file"></i>
+                <span>myDocuments</span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</header>

@@ -1,0 +1,68 @@
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.flex-start{
+    justify-content: flex-start;
+  }
+
+  &.flex-end{
+    justify-content: flex-end;
+  }
+}
+
+.flex-md {
+  @include up(500) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.w100 {
+  width: 100%;
+}
+
+// Margin
+
+.blink {
+  animation: 3s blinker linear infinite;
+}
+
+
+@keyframes blinker {
+  0% {
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  20% {
+     opacity: 0;
+   }
+  30%{
+    opacity: 1;
+  }
+  40% {
+     opacity: 0;
+   }
+  50%{
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  70%{
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  90%{
+    opacity: 1;
+  }
+  100%{
+     opacity: 1;
+   }
+}

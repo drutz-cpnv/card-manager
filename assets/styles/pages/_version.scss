@@ -1,0 +1,54 @@
+.document-container {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: space(4);
+
+  @include down(800) {
+    gap: space(1);
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+}
+
+
+
+.document__cover.card:has(> img) {
+  overflow: hidden;
+  z-index: -1;
+}
+
+.document__informations {
+  display: flex;
+  flex-direction: column;
+}
+
+.document__informations .action-container {
+  margin-top: auto;
+  margin-bottom: space(2);
+}
+
+.version__barcode{
+  z-index: -2 !important;
+}
+
+.version__barcode img {
+  width: 75px;
+  z-index: -2;
+}
+
+@include down(800) {
+  .document__informations h1,
+  .document__informations h2 {
+    text-align: center;
+  }
+
+  .version__barcode {
+    display: none;
+  }
+
+  .document__informations .action-container {
+    margin-top: space(2);
+  }
+
+}

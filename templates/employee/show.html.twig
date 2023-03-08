@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee{% endblock %}
+
+{% block body %}
+    <h1>Employee</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ employee.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ employee.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ employee.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Badge_number</th>
+                <td>{{ employee.badgeNumber }}</td>
+            </tr>
+            <tr>
+                <th>Birthdate</th>
+                <td>{{ employee.birthdate ? employee.birthdate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number</th>
+                <td>{{ employee.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ employee.email }}</td>
+            </tr>
+            <tr>
+                <th>IsPolice</th>
+                <td>{{ employee.isPolice ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ employee.picture }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ employee.createdAt ? employee.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ employee.updatedAt ? employee.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ employee.gender }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app.employee.index') }}">back to list</a>
+
+    <a href="{{ path('app.employee.edit', {'id': employee.id}) }}">edit</a>
+
+    {{ include('employee/_delete_form.html.twig') }}
+{% endblock %}

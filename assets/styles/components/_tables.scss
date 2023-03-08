@@ -1,0 +1,262 @@
+table, tr, th, td {
+  border-collapse: collapse;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+table .btn {
+  background: #f5f5f5;
+  border-radius: 6px;
+  border: 1px solid #d4d4d4;
+  box-shadow: 0 1px 0 0 #d4d4d4;
+  color: #262626;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 5px 15px;
+  white-space: nowrap;
+
+  &.btn-sm {
+    font-size: 12px;
+    line-height: 20px;
+    padding: 3px 12px;
+  }
+}
+
+table {
+  background: #FFFFFF;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 0 0 1px var(--table-border-color), 0 0 0 5px var(--background);
+  font-weight: 400;
+}
+
+table thead th.key, table tbody td.key {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+table thead th.key {
+  width: 35px;
+}
+
+table tbody td.key, table tbody th.key {
+  color: var(--gray-600);
+  font-size: 12px;
+  vertical-align: top;
+}
+
+table tbody th.key {
+  max-width: 72px;
+}
+
+table .form-button .table-icon-btn {
+  width: fit-content;
+
+  svg {
+    height: 18px;
+    stroke: var(--green);
+  }
+}
+
+table thead th {
+  background-color: var(--table-header);
+  border-bottom: 1px solid var(--table-border-color);
+  vertical-align: bottom;
+}
+table th {
+  font-weight: 700;
+  text-align: left;
+  vertical-align: middle;
+
+  &:has(svg) {
+    padding-top: 11px;
+    padding-bottom: 5px;
+  }
+  svg {
+    display: inline;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+table tbody th {
+  color: var(--gray-600);
+  //text-transform: lowercase;
+}
+
+table th, table td {
+  padding: 8px 10px;
+}
+
+table tbody th, table tbody td {
+  border: 1px solid var(--table-border-color);
+  border-top-width: 1px;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 1px;
+}
+
+table tbody tr:first-of-type th, table tbody tr:first-of-type td {
+  border-top: 0;
+}
+
+table tbody tr {
+  position: relative;
+}
+
+table tbody tr:last-of-type th, table tbody tr:last-of-type td {
+  border-bottom: 0;
+}
+
+/*
+
+.table {
+  width: 100%;
+  line-height: 1.2;
+  border-collapse: collapse;
+  color: var(--primary-dark);
+
+  .action-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .action-btn, button{
+      border: none;
+      background: none;
+      text-decoration: none;
+      box-shadow: none;
+      cursor: pointer;
+
+      .icon{
+        color: #bbbbbe;
+      }
+
+      &:hover{
+        .icon {
+          color: #000;
+        }
+      }
+    }
+  }
+
+  a{
+    text-decoration: none;
+    color: var(--primary-dark);
+
+    &:hover{
+      color: var(--primary);
+    }
+  }
+}
+
+
+.table img{
+  height: 45px;
+}
+.table thead th {
+  font-weight: 400;
+  text-transform: uppercase;
+  opacity: 0.6;
+  font-size: 0.9em;
+  text-align: left;
+}
+.table thead th svg {
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+  display: inline-block;
+}
+.table .desc svg {
+  transform: scaleY(-1);
+}
+.table thead th:last-child {
+  text-align: right;
+}
+.table td {
+  vertical-align: middle;
+  padding: space(2) space(2) space(2) 0;
+}
+.table td:last-child {
+  text-align: right;
+  padding-right: 0;
+
+  &:not(.barcode) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: space(1);
+  }
+}
+
+.table td.barcode {
+  padding-top: 0;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f3f3f3;
+}
+!*.table a:not([class^="btn"]) svg, .table button:not([class^="btn"]) svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  opacity: 0.15;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
+}*!
+.table a:not([class^='btn']):hover {
+  color: var(--primary);
+}
+.table tbody > a {
+  display: table-row;
+  text-decoration: none;
+  color: var(--primary-dark);
+
+  &:hover{
+    color: var(--primary);
+  }
+}
+
+
+.table .checkbox{
+  label{
+    display: flex;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--primary);
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+
+    span{
+      display: none;
+      margin: 0;
+      padding: 0;
+      width: 15px;
+      height: 15px;
+      font-size: 15px;
+    }
+  }
+
+  input:checked ~ label{
+    background-color: var(--primary);
+    span{
+      display: block;
+      color: #FFF;
+    }
+  }
+}
+
+.vtable {
+  th {
+    padding: space(2) space(2) space(2) 0;
+  }
+}*/

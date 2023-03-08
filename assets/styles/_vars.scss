@@ -1,0 +1,165 @@
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-ExtraBoldItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-SemiBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-ThinItalic.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-BoldItalic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-ExtraLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Light.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-MediumItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-ExtraBold.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-ExtraLightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-LightItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Thin.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+
+
+$primary: #0652DD;
+$font-alt: 'DM Sans', sans-serif;
+
+:root {
+  --primary: #0652DD;
+  --primary-light: lighten(var(--primary), 10%);
+  //--primary-dark: darken(var(--primary), 60%);
+  --primary-dark: #060f2f;
+  //--primary-light: #ffaeaf;
+  --primary-shadow: rgba(6, 82, 221, 0.2);
+  --card-padding: space(2);
+  --color-light: #8491c7;
+  --secondary: #f7fafd;
+  --contrast: #002aff;
+  --background-light: #FFFFFF;
+  --color-inversed60: #effbec99;
+  --background: #ffffff;
+  --bg-dot: #e5e5e5;
+  --border-light: var(--secondary);
+  --card-footer: #f7fafd;
+
+  --green: #22863a;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --success: #38ce35;
+  --error: #e01313;
+  --warning: #ff7b1e;
+  --warning-opacity: rgba(255, 123, 30, 0.08);
+  --passed: #1c6fe1;
+
+  --table-border-color: #d4d4d4;
+  --table-header: #f5f5f5;
+  --border-shadow: inset 0 0 0 1px #d4d4d4, 0 0 0 3px #fafafa, 0 0 0 5px #fff;
+
+  --space: 8px;
+  --border: #d5e3ec;
+  --shadow: #d8e1e8;
+
+  --page-header-height: 64px;
+
+
+  --container-padding: 20px;
+  --container-width: calc(100vw - var(--container-padding) * 2);
+
+  @media only screen and (min-width: 1370px) {
+    --container-width: 1200px;
+  }
+
+  /*@media (prefers-color-scheme: dark) {
+    --background: #212121;
+    --bg-dot: #4a4a4a;
+    --border-shadow: inset 0 0 0 1px #383838, 0 0 0 3px #414141, 0 0 0 5px #212121;
+    --card-bg: #464646;
+    color: #f1f1f1;
+  }*/
+}
+
+
