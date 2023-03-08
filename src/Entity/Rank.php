@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Data\RankData;
 use App\Repository\RankRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -31,6 +32,41 @@ class Rank
     public function __construct()
     {
         $this->employees = new ArrayCollection();
+    }
+
+    public static function createFromData(RankData $data): Rank
+    {
+        return (new Rank())
+            ->setName($data->getName())
+            ->setValue([
+                $data->getNonDefined(),
+                $data->getFemale(),
+                $data->getMale()
+            ])
+        ;
+    }
+
+    public function updateFromData(RankData $data): self
+    {
+        $this
+            ->setName($data->getName())
+            ->setValue([
+                $data->getNonDefined(),
+                $data->getFemale(),
+                $data->getMale()
+            ]);
+
+        return $this;
+    }
+
+    public function getRankData(): RankData
+    {
+        return (new RankData())
+            ->setName($this->getName())
+            ->setNonDefined($this->getValue()[0] ?? '')
+            ->setFemale($this->getValue()[1] ?? '')
+            ->setMale($this->getValue()[2] ?? '')
+        ;
     }
 
     public function getId(): ?int
