@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Card;
 use App\Entity\Employee;
 use App\Form\EmployeeType;
 use App\Repository\EmployeeRepository;
+use App\Service\CardService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,6 +66,28 @@ class EmployeeController extends AbstractController
         return $this->renderForm('employee/edit.html.twig', [
             'employee' => $employee,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/nouvelle-carte', name: 'app.employee.create_card', methods: ['GET', 'POST'])]
+    public function createCard(Request $request, Employee $employee): Response
+    {
+        $card = Card::createFromEmployee($employee);
+
+        return $this->render('employee/create_card.html.twig', [
+            'employee' => $employee,
+            'card' => $card,
+        ]);
+    }
+
+    #[Route('/{id}/carte-virtuelle', name: 'app.employee.create_card', methods: ['GET', 'POST'])]
+    public function getVCard(Request $request, Employee $employee): Response
+    {
+        $card = Card::createFromEmployee($employee);
+
+        return $this->render('employee/create_card.html.twig', [
+            'employee' => $employee,
+            'card' => $card,
         ]);
     }
 

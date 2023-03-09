@@ -62,6 +62,27 @@ class Card
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $rank_picture = null;
 
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTimeImmutable());
+    }
+
+    public static function createFromEmployee(Employee $employee): Card
+    {
+        return (new Card())
+            ->setFirstname($employee->getFirstname())
+            ->setLastname($employee->getLastname())
+            ->setBirthdate($employee->getBirthdate())
+            ->setNumber($employee->getBadgeNumber())
+            ->setRoleType($employee->getRoleType())
+            ->setRank($employee->getRankValue())
+            ->setRole($employee->getRoleValue())
+            ->setRankPicture($employee->getRank()->getPicture())
+            ->setPicture($employee->getPicture())
+            ->setToPrint(true)
+            ->setEmployee($employee);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

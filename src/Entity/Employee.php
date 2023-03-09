@@ -7,15 +7,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
+#[Vich\Uploadable()]
 class Employee
 {
-
     const GENDER_NAMES = [
         "Non-défini",
         "Femme",
         "Homme"
+    ];
+
+    const TYPE_NAMES = [
+        true => 'Police',
+        false => 'Civil'
     ];
 
     #[ORM\Id]
@@ -47,6 +55,14 @@ class Employee
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[Vich\UploadableField(mapping: "employees", fileNameProperty: "picture")]
+    #[Assert\File(mimeTypes: [
+        "image/png",
+        "image/jpg",
+        "image/jpeg",
+    ])]
+    private ?File $pictureFile = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
@@ -73,6 +89,11 @@ class Employee
         $this->setGender(0);
     }
 
+    public function __toString(): string
+    {
+        return $this->getRankAbbreviation() . " " . $this->getLastname() . " " . $this->getFirstname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,7 +113,7 @@ class Employee
 
     public function getLastname(): ?string
     {
-        return $this->lastname;
+        return strtoupper($this->lastname);
     }
 
     public function setLastname(string $lastname): self
@@ -174,6 +195,21 @@ class Employee
         return $this;
     }
 
+    public function setPictureFile(File $file = null): self
+    {
+        $this->pictureFile = $file;
+
+        if ($file) {
+            $this->setUpdatedAt(new \DateTimeImmutable('now'));
+        }
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
@@ -203,6 +239,11 @@ class Employee
         return $this->role;
     }
 
+    public function getRoleValue(): string
+    {
+        return $this->getRole()->getValue()[$this->getGender()];
+    }
+
     public function setRole(?Role $role): self
     {
         $this->role = $role;
@@ -213,6 +254,16 @@ class Employee
     public function getRank(): ?Rank
     {
         return $this->rank;
+    }
+
+    public function getRankValue(): string
+    {
+        return $this->getRank()->getValue()[$this->getGender()];
+    }
+
+    public function getRankAbbreviation(): string
+    {
+        return $this->getRank()->getAbbreviation()[$this->getGender()];
     }
 
     public function setRank(?Rank $rank): self
@@ -267,6 +318,11 @@ class Employee
     public function getGenderName(): string
     {
         return self::GENDER_NAMES[$this->getGender()];
+    }
+
+    public function getRoleType(): string
+    {
+        return self::TYPE_NAMES[$this->isIsPolice()];
     }
 
 }

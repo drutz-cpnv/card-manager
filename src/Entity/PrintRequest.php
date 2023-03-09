@@ -87,4 +87,15 @@ class PrintRequest
 
         return $this;
     }
+
+    public function printed(): self
+    {
+        $this->setPrintedAt(new \DateTimeImmutable());
+        return $this;
+    }
+
+    public function isPrinted(): bool
+    {
+        return !is_null($this->getPrintedAt());
+    }
 }
