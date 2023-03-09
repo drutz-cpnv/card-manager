@@ -46,9 +46,10 @@ class DefaultRankCommand extends Command
     {
 
         $current_ranks = $this->rankRepository->findAll();
-        $current_ranks = array_map(function (Rank $rank) {
-            return $rank->getName();
-        }, $current_ranks);
+        $in_ranks = [];
+        foreach ($current_ranks as $current_rank) {
+            $in_ranks[$current_rank->getName()] = $current_rank;
+        }
 
         $ranks = [];
         $to_persist = [];
@@ -60,6 +61,11 @@ class DefaultRankCommand extends Command
                 "Madame",
                 "Monsieur"
             ])
+            ->setAbbreviation([
+                0 => "M./Mme.",
+                1 => "Mme.",
+                2 => "M."
+            ])
         ;
 
         $ranks[] = (new Rank())
@@ -68,6 +74,11 @@ class DefaultRankCommand extends Command
                 "Lieutenant-Colonel",
                 "Lieutenant-Colonel",
                 "Lieutenant-Colonel"
+            ])
+            ->setAbbreviation([
+                0 => "Lt col.",
+                1 => "Lt col",
+                2 => "Lt col"
             ])
         ;
 
@@ -78,6 +89,11 @@ class DefaultRankCommand extends Command
                 "Capitaine",
                 "Capitaine"
             ])
+            ->setAbbreviation([
+                0 => "Cap.",
+                1 => "Cap.",
+                2 => "Cap."
+            ])
         ;
 
         $ranks[] = (new Rank())
@@ -86,6 +102,11 @@ class DefaultRankCommand extends Command
                 "Premi•er•ère-Lieutenant",
                 "Première-Lieutenant",
                 "Premier-Lieutenant"
+            ])
+            ->setAbbreviation([
+                0 => "Plt.",
+                1 => "Plt.",
+                2 => "Plt."
             ])
         ;
 
@@ -96,6 +117,11 @@ class DefaultRankCommand extends Command
                 "Adjudant",
                 "Adjudant"
             ])
+            ->setAbbreviation([
+                0 => "Adj.",
+                1 => "Adj.",
+                2 => "Adj."
+            ])
         ;
 
         $ranks[] = (new Rank())
@@ -104,6 +130,11 @@ class DefaultRankCommand extends Command
                 "Sergent-Major•e",
                 "Sergent-Majore",
                 "Sergent-Major"
+            ])
+            ->setAbbreviation([
+                0 => "Sgtm•e.",
+                1 => "Sgtme.",
+                2 => "Sgtm."
             ])
         ;
 
@@ -114,6 +145,11 @@ class DefaultRankCommand extends Command
                 "Sergent",
                 "Sergent"
             ])
+            ->setAbbreviation([
+                0 => "Sgt.",
+                1 => "Sgt.",
+                2 => "Sgt."
+            ])
         ;
 
         $ranks[] = (new Rank())
@@ -122,6 +158,11 @@ class DefaultRankCommand extends Command
                 "Caporal•e",
                 "Caporale",
                 "Caporal"
+            ])
+            ->setAbbreviation([
+                0 => "Cpl•e.",
+                1 => "Cple.",
+                2 => "Cpl."
             ])
         ;
 
@@ -132,6 +173,11 @@ class DefaultRankCommand extends Command
                 "Appointée",
                 "Appointé"
             ])
+            ->setAbbreviation([
+                0 => "App•e.",
+                1 => "Appe.",
+                2 => "App."
+            ])
         ;
 
         $ranks[] = (new Rank())
@@ -140,6 +186,11 @@ class DefaultRankCommand extends Command
                 "Agent•e",
                 "Agente",
                 "Agent"
+            ])
+            ->setAbbreviation([
+                0 => "Agt•e.",
+                1 => "Agte.",
+                2 => "Agt."
             ])
         ;
 
@@ -150,6 +201,11 @@ class DefaultRankCommand extends Command
                 "Cheffe",
                 "Chef"
             ])
+            ->setAbbreviation([
+                0 => "Mme./M.",
+                1 => "Mme.",
+                2 => "M."
+            ])
         ;
 
         $ranks[] = (new Rank())
@@ -159,14 +215,26 @@ class DefaultRankCommand extends Command
                 "Aspirante",
                 "Aspirant"
             ])
+            ->setAbbreviation([
+                0 => "Asp•e.",
+                1 => "Aspe.",
+                2 => "Asp."
+            ])
         ;
 
         $count = 0;
 
         foreach ($ranks as $rank) {
-            if(!in_array($rank->getName(), $current_ranks)) {
+            if(!array_key_exists($rank->getName(), $in_ranks)) {
                 $this->entityManager->persist($rank);
                 $count++;
+            } else {
+                $update = $in_ranks[$rank->getName()];
+                $update
+                    ->setName($rank->getName())
+                    ->setAbbreviation($rank->getAbbreviation())
+                    ->setValue($rank->getValue())
+                ;
             }
         }
 

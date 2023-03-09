@@ -29,6 +29,9 @@ class Rank
     #[ORM\OneToMany(mappedBy: 'rank', targetEntity: Employee::class)]
     private Collection $employees;
 
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $abbreviation = [];
+
     public function __construct()
     {
         $this->employees = new ArrayCollection();
@@ -143,5 +146,17 @@ class Rank
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    public function getAbbreviation(): array
+    {
+        return $this->abbreviation;
+    }
+
+    public function setAbbreviation(?array $abbreviation): self
+    {
+        $this->abbreviation = $abbreviation;
+
+        return $this;
     }
 }
