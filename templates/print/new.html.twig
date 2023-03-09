@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PrintRequest{% endblock %}
+
+{% block body %}
+    <h1>Create new PrintRequest</h1>
+
+    {{ include('print/_form.html.twig') }}
+
+    <a href="{{ path('app.print.index') }}">back to list</a>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Data\PrintData;
 use App\Repository\PrintRequestRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -27,6 +28,29 @@ class PrintRequest
     public function __construct()
     {
         $this->cards = new ArrayCollection();
+        $this->setCreatedAt(new \DateTimeImmutable());
+    }
+
+    public static function fromData(PrintData $data): PrintRequest
+    {
+        return (new PrintRequest())
+            ->addCards($data->getCards())
+            ;
+    }
+
+    public function getData(): PrintData
+    {
+        return (new PrintData())
+            ->setCards($this->getCards()->toArray());
+    }
+
+    public function updateFromData(PrintData $data): self
+    {
+        foreach ($this->getCards() as $card) {
+            $this->removeCard($card);
+        }
+        $this->addCards($data->getCards());
+        return $this;
     }
 
     public function getId(): ?int
@@ -71,6 +95,15 @@ class PrintRequest
         if (!$this->cards->contains($card)) {
             $this->cards->add($card);
             $card->setPrintRequest($this);
+        }
+
+        return $this;
+    }
+
+    public function addCards(array|Collection $cards): self
+    {
+        foreach ($cards as $card) {
+            $this->addCard($card);
         }
 
         return $this;

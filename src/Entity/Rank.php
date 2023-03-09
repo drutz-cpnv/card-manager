@@ -46,6 +46,11 @@ class Rank
                 $data->getFemale(),
                 $data->getMale()
             ])
+            ->setAbbreviation([
+                $data->getAbrNonDefined(),
+                $data->getAbrFemale(),
+                $data->getAbrMale()
+            ])
         ;
     }
 
@@ -57,7 +62,13 @@ class Rank
                 $data->getNonDefined(),
                 $data->getFemale(),
                 $data->getMale()
-            ]);
+            ])
+            ->setAbbreviation([
+                $data->getAbrNonDefined(),
+                $data->getAbrFemale(),
+                $data->getAbrMale()
+            ])
+        ;
 
         return $this;
     }
@@ -69,6 +80,9 @@ class Rank
             ->setNonDefined($this->getValue()[0] ?? '')
             ->setFemale($this->getValue()[1] ?? '')
             ->setMale($this->getValue()[2] ?? '')
+            ->setAbrNonDefined($this->getAbbreviation()[0] ?? '')
+            ->setAbrFemale($this->getAbbreviation()[1] ?? '')
+            ->setAbrMale($this->getAbbreviation()[2] ?? '')
         ;
     }
 

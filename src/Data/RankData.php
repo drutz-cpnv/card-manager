@@ -7,8 +7,12 @@ class RankData
 
     private ?string $name = null;
     private ?string $nonDefined = null;
+    private ?string $abrNonDefined = null;
     private ?string $female = null;
+    private ?string $abrFemale = null;
     private ?string $male = null;
+    private ?string $abrMale = null;
+
 
     /**
      * @return string|null
@@ -81,6 +85,61 @@ class RankData
         $this->male = $male;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getAbrNonDefined(): ?string
+    {
+        return $this->abrNonDefined;
+    }
+
+    /**
+     * @param string|null $abrNonDefined
+     * @return RankData
+     */
+    public function setAbrNonDefined(?string $abrNonDefined): RankData
+    {
+        $this->abrNonDefined = $abrNonDefined;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAbrFemale(): ?string
+    {
+        return $this->abrFemale;
+    }
+
+    /**
+     * @param string|null $abrFemale
+     * @return RankData
+     */
+    public function setAbrFemale(?string $abrFemale): RankData
+    {
+        $this->abrFemale = $abrFemale;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAbrMale(): ?string
+    {
+        return $this->abrMale;
+    }
+
+    /**
+     * @param string|null $abrMale
+     * @return RankData
+     */
+    public function setAbrMale(?string $abrMale): RankData
+    {
+        $this->abrMale = $abrMale;
+        return $this;
+    }
+
 
 
 

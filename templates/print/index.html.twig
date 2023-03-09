@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PrintRequest index{% endblock %}
+
+{% block body %}
+    <h1>PrintRequest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created_at</th>
+                <th>Printed_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for print_request in print_requests %}
+            <tr>
+                <td>{{ print_request.id }}</td>
+                <td>{{ print_request.createdAt ? print_request.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ print_request.printedAt ? print_request.printedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app.print.show', {'id': print_request.id}) }}">show</a>
+                    <a href="{{ path('app.print.edit', {'id': print_request.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app.print.new') }}">Create new</a>
+{% endblock %}

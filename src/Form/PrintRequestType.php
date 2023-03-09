@@ -2,30 +2,24 @@
 
 namespace App\Form;
 
-use App\Data\RankData;
+use App\Data\PrintData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RankType extends AbstractType
+class PrintRequestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('nonDefined')
-            ->add('abrNonDefined')
-            ->add('female')
-            ->add('abrFemale')
-            ->add('male')
-            ->add('abrMale')
+            ->add('cards')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => RankData::class,
+            'data_class' => PrintData::class,
         ]);
     }
 }
