@@ -39,6 +39,21 @@ class CardRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Card[] Returns an array of Driver objects
+     */
+    public function findToPrintToday(): array
+    {
+        $today = (new \DateTime())->format("Ymd");
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.uid LIKE :val')
+            ->setParameter('val', $today.'%')
+            ->orderBy('c.uid', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 //    /**
 //     * @return Card[] Returns an array of Card objects
 //     */
