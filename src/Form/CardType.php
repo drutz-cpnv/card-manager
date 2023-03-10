@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Card;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,11 +23,19 @@ class CardType extends AbstractType
             ->add('birthdate' ,null, [
                 'widget' => 'single_text'
             ])
-            ->add('uid')
-            ->add('legal_text')
-            ->add('role_type')
+            ->add('uid', null, [
+                'help' => "Unique Identifier"
+            ])
+            ->add('legal_text', null, [
+                'help' => 'This text appears on the back of the card and defines the rights and powers conferred by the card on its holder.'
+            ])
+            ->add('role_type', ChoiceType::class, [
+                'choices' => [
+                    'Civil' => 'Civil',
+                    'Police' => 'Police'
+                ]
+            ])
             ->add('to_print')
-            ->add('employee')
         ;
     }
 

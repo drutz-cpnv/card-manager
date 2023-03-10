@@ -14,7 +14,9 @@ class EmployeeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('rank')
+            ->add('rank', null, [
+                'label' => "Rank/Title"
+            ])
             ->add('firstname')
             ->add('lastname')
             ->add('birthdate', null, [
