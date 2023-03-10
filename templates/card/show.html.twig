@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+    <h1>Card</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ card.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ card.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ card.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ card.role }}</td>
+            </tr>
+            <tr>
+                <th>Rank</th>
+                <td>{{ card.rank }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ card.number }}</td>
+            </tr>
+            <tr>
+                <th>Birthdate</th>
+                <td>{{ card.birthdate ? card.birthdate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ card.picture }}</td>
+            </tr>
+            <tr>
+                <th>Uid</th>
+                <td>{{ card.uid }}</td>
+            </tr>
+            <tr>
+                <th>Legal_text</th>
+                <td>{{ card.legalText }}</td>
+            </tr>
+            <tr>
+                <th>Role_type</th>
+                <td>{{ card.roleType }}</td>
+            </tr>
+            <tr>
+                <th>To_print</th>
+                <td>{{ card.toPrint ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ card.createdAt ? card.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ card.updatedAt ? card.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Rank_picture</th>
+                <td>{{ card.rankPicture }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app.card.index') }}">back to list</a>
+
+    <a href="{{ path('app.card.edit', {'id': card.id}) }}">edit</a>
+
+    {{ include('card/_delete_form.html.twig') }}
+{% endblock %}
