@@ -7,6 +7,7 @@ use App\Entity\Employee;
 use App\Form\EmployeeType;
 use App\Repository\EmployeeRepository;
 use App\Service\CardService;
+use App\Service\VirtualCardService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,8 +82,9 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/{id}/carte-virtuelle', name: 'app.employee.create_card', methods: ['GET', 'POST'])]
-    public function getVCard(Request $request, Employee $employee): Response
+    public function getVCard(Request $request, Employee $employee, VirtualCardService $virtualCardService): Response
     {
+        $virtualCardService->create($employee);
         $card = Card::createFromEmployee($employee);
 
         return $this->render('employee/create_card.html.twig', [

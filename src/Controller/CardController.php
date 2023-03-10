@@ -36,6 +36,7 @@ class CardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $card->setUpdatedAt(new \DateTimeImmutable());
             $cardRepository->save($card, true);
 
             return $this->redirectToRoute('app.card.index', [], Response::HTTP_SEE_OTHER);

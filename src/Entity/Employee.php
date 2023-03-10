@@ -91,7 +91,7 @@ class Employee
 
     public function __toString(): string
     {
-        return $this->getRankAbbreviation() . " " . $this->getLastname() . " " . $this->getFirstname();
+        return $this->getFullname();
     }
 
     public function getId(): ?int
@@ -121,6 +121,11 @@ class Employee
         $this->lastname = $lastname;
 
         return $this;
+    }
+
+    public function getFullname(): string
+    {
+        return $this->getRankAbbreviation() . " " . $this->getLastname() . " " . $this->getFirstname();
     }
 
     public function getBadgeNumber(): ?int

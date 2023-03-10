@@ -2,12 +2,14 @@
 
 namespace App\Command;
 
+use App\Data\VCardData;
 use App\Entity\Employee;
 use App\Repository\EmployeeRepository;
 use App\Repository\RankRepository;
 use App\Repository\RoleRepository;
 use App\Service\VirtualCardService;
 use Doctrine\ORM\EntityManagerInterface;
+use Sabre\VObject\Component\VCard;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -40,6 +42,12 @@ class TestCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        $card = $this->virtualCardService->create(
+            (VCardData::createFromEmployee($this->entityManager->getRepository(Employee::class)->find(1)))
+            ->setNameDisplayType(VCardData::DISPLAY_MODE_ROLE)
+        );
+        file_put_contents('drz.vcf', $card->serialize());
 
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
