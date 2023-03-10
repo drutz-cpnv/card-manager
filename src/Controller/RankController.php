@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/grades')]
-class RankController extends AbstractController
+class RankController extends BaseController
 {
     #[Route('', name: 'app.rank.index', methods: ['GET'])]
     public function index(RankRepository $rankRepository): Response

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/impression')]
-class PrintController extends AbstractController
+class PrintController extends BaseController
 {
     #[Route('', name: 'app.print.index', methods: ['GET'])]
     public function index(PrintRequestRepository $printRequestRepository): Response

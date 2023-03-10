@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/fonction')]
-class RoleController extends AbstractController
+class RoleController extends BaseController
 {
     #[Route('', name: 'app.role.index', methods: ['GET'])]
     public function index(RoleRepository $roleRepository): Response

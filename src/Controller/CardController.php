@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/card')]
-class CardController extends AbstractController
+class CardController extends BaseController
 {
     #[Route('', name: 'app.card.index', methods: ['GET'])]
     public function index(CardRepository $cardRepository): Response
@@ -31,6 +31,25 @@ class CardController extends AbstractController
 
     #[Route('/{id}/modifier', name: 'app.card.edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Card $card, CardRepository $cardRepository): Response
+    {
+        $form = $this->createForm(CardType::class, $card);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $card->setUpdatedAt(new \DateTimeImmutable());
+            $cardRepository->save($card, true);
+
+            return $this->redirectToRoute('app.card.index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('card/edit.html.twig', [
+            'card' => $card,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/imprimer', name: 'app.card.edit', methods: ['GET', 'POST'])]
+    public function printCard(Request $request, Card $card, CardRepository $cardRepository): Response
     {
         $form = $this->createForm(CardType::class, $card);
         $form->handleRequest($request);

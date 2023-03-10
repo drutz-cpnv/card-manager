@@ -5,16 +5,17 @@ namespace App\Controller;
 use App\Entity\Card;
 use App\Entity\Employee;
 use App\Form\EmployeeType;
+use App\Repository\CardRepository;
 use App\Repository\EmployeeRepository;
 use App\Service\CardService;
 use App\Service\VirtualCardService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/personnel')]
-class EmployeeController extends AbstractController
+class EmployeeController extends BaseController
 {
     #[Route('', name: 'app.employee.index', methods: ['GET'])]
     public function index(EmployeeRepository $employeeRepository): Response
@@ -70,10 +71,16 @@ class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/nouvelle-carte', name: 'app.employee.create_card', methods: ['GET', 'POST'])]
-    public function createCard(Request $request, Employee $employee): Response
+    #[Route('/{id}/nouvelle-carte', name: 'app.employee.create_card', methods: ['GET'])]
+    public function createCard(Request $request, Employee $employee, CardService $cardService, EntityManagerInterface $em, CardRepository $cardRepository): Response
     {
-        $card = Card::createFromEmployee($employee);
+        if(!$this->isGranted('CARD_CREATE', $employee)) {
+            $this->addNotification("Veuillez vous assurer que tous les pré-requis de la création d'une carte sont remplis pour cet employé. <a href=\"#\">Voir la documentation</a>");
+            return $this->redirectToRoute('app.employee.show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        $card = $cardService->create($employee);
+        $cardRepository->save($card, true);
 
         return $this->render('employee/create_card.html.twig', [
             'employee' => $employee,
@@ -81,7 +88,7 @@ class EmployeeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/carte-virtuelle', name: 'app.employee.create_card', methods: ['GET', 'POST'])]
+    #[Route('/{id}/carte-virtuelle', name: 'app.employee.create_vcard', methods: ['GET', 'POST'])]
     public function getVCard(Request $request, Employee $employee, VirtualCardService $virtualCardService): Response
     {
         $virtualCardService->create($employee);
