@@ -1,40 +1,67 @@
-.page-warper > header{
-  height: var(--page-header-height);
-  width: 100%;
-  backdrop-filter: saturate(180%) blur(2px);
-  -webkit-backdrop-filter: saturate(180%) blur(2px);
-  //background-color: rgba(239, 239, 239, 0.31);
+.page-warper > aside{
+  height: calc(100% + 2px);
+  width: var(--page-aside-width);
+  background-color: var(--background);
   border-bottom: 1px solid var(--border);
   position: fixed;
-  top: 0;
+  top: -1px;
   left: 0;
+  background: var(--card-bg, var(--background-light));
+  box-shadow: var(--border-shadow);
 }
 
-.error-page .page-warper > header {
-  background-color: rgba(255, 0, 0, 0.31) !important;
-  border-bottom: 5px solid #f40000;
-  height: 200px;
+.page-warper > aside .aside-header{
+  margin-top: space(2);
+  padding: space(2) 0;
+  .logo svg{
+    width: 60%;
+  }
 
-  h1 {
-    font-size: 70px;
-    color: #f40000;
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 900;
-  }
-  h2 {
-    font-family: "JetBrains Mono", monospace;
-  }
-  .blink {
-    margin-left: space(1);
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0 space(2.5);
+    line-height: 20px;
+    margin-top: space(2);
   }
 }
 
-.error-page .page-warper:has(> header) {
-  padding-top: 200px;
+aside nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: space(2);
 }
 
-.page-warper:has(> header) {
-  padding-top: var(--page-header-height);
+
+
+.nav-item svg {
+  height: 10%;
+  width: 10%;
+  stroke: var(--gray-600);
+  margin-right: space(1);
+}
+
+.nav-item {
+  margin-inline: space(1.25);
+  padding: space(1) space(1.25);
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-800);
+
+  &:hover {
+    color: var(--primary);
+    background-color: var(--gray-200);
+
+    svg {
+      stroke: var(--primary);
+    }
+  }
+}
+
+.page-warper:has(> aside) {
+  padding-left: var(--page-aside-width);
 }
 
 .page-warper > header .container {
@@ -63,7 +90,7 @@ main .container > header {
   display: flex;
   margin-bottom: space(4);
 
-  & > :last-child {
+  & > :last-child:not(h1, h2, h3) {
     margin-left: auto;
   }
 }

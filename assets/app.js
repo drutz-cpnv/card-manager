@@ -10,3 +10,18 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import Flash from "./modules/flash";
+import {ConfirmBtn} from "./modules/confirmBtn";
+import {replace} from "feather-icons";
+
+replace();
+
+[...document.querySelectorAll("[data-flash]")].map(v => {
+    new Flash(v)
+});
+
+
+
+[...document.querySelectorAll("[data-confirm]")].map(v => {
+    new ConfirmBtn(v)
+});

@@ -96,20 +96,20 @@
 }
 
 
-$primary: #0652DD;
-$font-alt: 'DM Sans', sans-serif;
+$primary: #dc0000;
+$font-alt: 'Plus Jakarta Sans', sans-serif;
 
 :root {
-  --primary: #0652DD;
+  --primary: #e80000;
   --primary-light: lighten(var(--primary), 10%);
   //--primary-dark: darken(var(--primary), 60%);
-  --primary-dark: #060f2f;
+  --primary-dark: #2f0606;
   //--primary-light: #ffaeaf;
-  --primary-shadow: rgba(6, 82, 221, 0.2);
+  --primary-shadow: rgba(221, 6, 6, 0.2);
   --card-padding: space(2);
-  --color-light: #8491c7;
+  --color-light: #c78484;
   --secondary: #f7fafd;
-  --contrast: #002aff;
+  --contrast: #ff0000;
   --background-light: #FFFFFF;
   --color-inversed60: #effbec99;
   --background: #ffffff;
@@ -143,8 +143,7 @@ $font-alt: 'DM Sans', sans-serif;
   --border: #d5e3ec;
   --shadow: #d8e1e8;
 
-  --page-header-height: 64px;
-
+  --page-aside-width: 250px;
 
   --container-padding: 20px;
   --container-width: calc(100vw - var(--container-padding) * 2);

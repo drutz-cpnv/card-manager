@@ -1,55 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Employee index{% endblock %}
+{% block title %}Personnel{% endblock %}
 
 {% block body %}
-    <h1>Employee index</h1>
+    <header>
+        <h1 class="h2">Personnel</h1>
+        <a href="{{ path('app.employee.new') }}" class="btn-primary btn-small">Nouvel employé</a>
+    </header>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Badge_number</th>
-                <th>Birthdate</th>
-                <th>Phone_number</th>
-                <th>Email</th>
-                <th>IsPolice</th>
-                <th>Picture</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>Gender</th>
-                <th>actions</th>
+                <th class="key" style="width: 50px">id</th>
+                <th>Prénom</th>
+                <th>Nom de famille</th>
+                <th>Police</th>
+                <th>Dernière modification</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for employee in employees %}
             <tr>
-                <td>{{ employee.id }}</td>
+                <th>{{ employee.id }}</th>
                 <td>{{ employee.firstname }}</td>
                 <td>{{ employee.lastname }}</td>
-                <td>{{ employee.badgeNumber }}</td>
-                <td>{{ employee.birthdate ? employee.birthdate|date('Y-m-d') : '' }}</td>
-                <td>{{ employee.phoneNumber }}</td>
-                <td>{{ employee.email }}</td>
                 <td>{{ employee.isPolice ? 'Yes' : 'No' }}</td>
-                <td>{{ employee.picture }}</td>
-                <td>{{ employee.createdAt ? employee.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ employee.updatedAt ? employee.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ employee.gender }}</td>
-                <td>
-                    <a href="{{ path('app.employee.show', {'id': employee.id}) }}">show</a>
-                    <a href="{{ path('app.employee.edit', {'id': employee.id}) }}">edit</a>
+                <td>{{ employee.updatedAt ? employee.updatedAt|date('Y-m-d H:i:s') : employee.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td class="flex flex-end" style="gap: 8px">
+                    <a href="{{ path('app.employee.show', {'id': employee.id}) }}" class="btn btn-sm">Afficher</a>
+                    <a href="{{ path('app.employee.edit', {'id': employee.id}) }}" class="btn btn-sm">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="13">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app.employee.new') }}">Create new</a>
 {% endblock %}
