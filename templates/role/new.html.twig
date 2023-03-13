@@ -3,9 +3,6 @@
 {% block title %}New Role{% endblock %}
 
 {% block body %}
-    <h1>Create new Role</h1>
-
+    <h1 class="h4 md"><a href="{{ path('app.role.index') }}" class="btn-back"> <i data-feather="chevron-left"></i> </a> Nouvel fonction</h1>
     {{ include('role/_form.html.twig') }}
-
-    <a href="{{ path('app.role.index') }}">back to list</a>
 {% endblock %}

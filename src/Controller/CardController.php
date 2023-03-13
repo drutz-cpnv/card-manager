@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\Translation\t;
 
 #[Route('/card')]
 class CardController extends BaseController
@@ -39,7 +40,7 @@ class CardController extends BaseController
             $card->setUpdatedAt(new \DateTimeImmutable());
             $cardRepository->save($card, true);
 
-            return $this->redirectToRoute('app.card.index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app.card.show', ['id' => $card->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('card/edit.html.twig', [
@@ -48,23 +49,17 @@ class CardController extends BaseController
         ]);
     }
 
-    #[Route('/{id}/imprimer', name: 'app.card.edit', methods: ['GET', 'POST'])]
-    public function printCard(Request $request, Card $card, CardRepository $cardRepository): Response
-    {
-        $form = $this->createForm(CardType::class, $card);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    #[Route('/{id}/imprime', name: 'app.card.printed', methods: ['POST'])]
+    public function printed(Request $request, Card $card, CardRepository $cardRepository): Response
+    {
+        if ($this->isCsrfTokenValid('printed'.$card->getId(), $request->request->get('_token'))) {
+            $card->setToPrint(!$card->isToPrint());
             $card->setUpdatedAt(new \DateTimeImmutable());
             $cardRepository->save($card, true);
-
-            return $this->redirectToRoute('app.card.index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('card/edit.html.twig', [
-            'card' => $card,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app.card.show', ['id' => $card->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app.card.delete', methods: ['POST'])]

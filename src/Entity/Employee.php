@@ -87,6 +87,7 @@ class Employee
         $this->setCreatedAt(new \DateTimeImmutable());
         $this->setIsPolice(false);
         $this->setGender(0);
+        $this->setPhoneNumber("+41218111919");
     }
 
     public function __toString(): string

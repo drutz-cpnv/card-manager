@@ -1,4 +1,28 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="card-md p3">
+    {{ form_start(form) }}
+    <section class="stack-large">
+        <section>
+            <div class="stack">
+                <div class="stack">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="grid">
+                    {{ form_row(form.nonDefined) }}
+                    {{ form_row(form.abrNonDefined) }}
+                </div>
+                <div class="grid">
+                    {{ form_row(form.female) }}
+                    {{ form_row(form.abrFemale) }}
+                </div>
+                <div class="grid">
+                    {{ form_row(form.male) }}
+                    {{ form_row(form.abrMale) }}
+                </div>
+            </div>
+        </section>
+        <section>
+            <button type="submit" class="btn-gradient">{{ button_label|default('Enregistrer') }}</button>
+        </section>
+    </section>
+    {{ form_end(form) }}
+</div>

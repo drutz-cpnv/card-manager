@@ -11,7 +11,7 @@ class CardControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
     private CardRepository $repository;
-    private string $path = '/card/';
+    private string $path = '/card';
 
     protected function setUp(): void
     {

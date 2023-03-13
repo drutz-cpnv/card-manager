@@ -12,8 +12,7 @@
         <thead>
             <tr>
                 <th class="key" style="width: 50px">id</th>
-                <th>Prénom</th>
-                <th>Nom de famille</th>
+                <th>Nom complet</th>
                 <th>Police</th>
                 <th>Dernière modification</th>
                 <th></th>
@@ -22,11 +21,10 @@
         <tbody>
         {% for employee in employees %}
             <tr>
-                <th>{{ employee.id }}</th>
-                <td>{{ employee.firstname }}</td>
-                <td>{{ employee.lastname }}</td>
-                <td>{{ employee.isPolice ? 'Yes' : 'No' }}</td>
-                <td>{{ employee.updatedAt ? employee.updatedAt|date('Y-m-d H:i:s') : employee.createdAt|date('d/m/Y H:i:s') }}</td>
+                <th class="key">{{ employee.id }}</th>
+                <td>{% if employee.cards.count > 0 %}<a href="{{ path('app.card.show', {id: employee.cards.last.id}) }}"><i data-feather="credit-card"></i></a>{% endif %}{{ employee }}</td>
+                <td>{{ employee.isPolice ? 'Oui' : 'Non' }}</td>
+                <td>{{ employee.updatedAt ? employee.updatedAt|date('d/m/Y H:i:s') : employee.createdAt|date('d/m/Y H:i:s') }}</td>
                 <td class="flex flex-end" style="gap: 8px">
                     <a href="{{ path('app.employee.show', {'id': employee.id}) }}" class="btn btn-sm">Afficher</a>
                     <a href="{{ path('app.employee.edit', {'id': employee.id}) }}" class="btn btn-sm">Modifier</a>

@@ -1,4 +1,24 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="card p3">
+    {{ form_start(form) }}
+    <section class="stack-large">
+        <section class="stack">
+            <div class="grid">
+                {{ form_row(form.rank) }}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.uid) }}
+                {{ form_row(form.number) }}
+                {{ form_row(form.role) }}
+                {{ form_row(form.roleType) }}
+            </div>
+            <div class="stack">
+                {{ form_row(form.legalText, {attr: {"style": "min-height: 100px"}}) }}
+                {{ form_row(form.toPrint) }}
+            </div>
+        </section>
+        <section>
+            <button type="submit" class="btn-gradient">{{ button_label|default('Enregistrer') }}</button>
+        </section>
+    </section>
+    {{ form_end(form) }}
+</div>

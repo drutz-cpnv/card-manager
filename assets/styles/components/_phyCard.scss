@@ -1,0 +1,39 @@
+.p-card {
+  width: 500px;
+  background-color: var(--gray-200);
+  height: 275px;
+  padding: space(2);
+  display: flex;
+  gap: space(3);
+  border-radius: 10px;
+}
+
+.p-card__photo {
+  height: 100%;
+  width: 170px;
+  border-radius: 5px;
+  background-size: cover;
+  background-position: center;
+}
+
+.p-card__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-card__details > * {
+  padding: 5px 4px;
+  display: inline;
+  width: fit-content;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover {
+    background: var(--gray-400);
+  }
+}
+
+.c-details__lastname {
+  font-size: 25px;
+  font-weight: 500;
+}

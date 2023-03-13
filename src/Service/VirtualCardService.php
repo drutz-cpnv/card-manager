@@ -35,6 +35,36 @@ class VirtualCardService
             ],
         ]);
 
+        $vcard->add(
+            'ADR',
+            [
+                '',
+                '',
+                'Avenue des Pâquis 31',
+                'Morges',
+                '',
+                '1110',
+                'Suisse',
+            ],
+            ['TYPE' => 'work'],
+        );
+
+        if($data->getNameDisplayType() === VCardData::DISPLAY_MODE_PRM) {
+            $vcard->add(
+                'TEL',
+                '+41218111919',
+                ['type' => 'work'],
+            );
+
+            $vcard->add(
+                'EMAIL',
+                'info@police-region-morges.ch',
+                ['type' => 'work'],
+            );
+
+            return $vcard;
+        }
+
         if($data->isDisplayRank()) {
             $vcard->add('TITLE', $data->getEmployee()->getRankValue(),);
         }
@@ -50,19 +80,6 @@ class VirtualCardService
             ['type' => 'work'],
         );
 
-        $vcard->add(
-            'ADR',
-            [
-                '',
-                '',
-                'Avenue des Pâquis 31',
-                'Morges',
-                '',
-                '1110',
-                'Suisse',
-            ],
-            ['TYPE' => 'work'],
-        );
 
         $vcard->add(
             'EMAIL',
@@ -86,7 +103,7 @@ class VirtualCardService
     public function setFullname(VCard $vcard, VCardData $data): void
     {
         $vcard->add('FN', (string)$data->getEmployee());
-        $vcard->add('F', [
+        $vcard->add('N', [
             $data->getEmployee()->getLastname(),
             $data->getEmployee()->getFirstname(),
             '',
@@ -97,7 +114,7 @@ class VirtualCardService
     public function setBadgeNumberAsName(VCard $vcard, VCardData $data): void
     {
         $vcard->add('FN', 'PRM - ' . $data->getEmployee()->getBadgeNumber());
-        $vcard->add('F', [
+        $vcard->add('N', [
             $data->getEmployee()->getBadgeNumber(),
             'PRM',
             '',
@@ -108,7 +125,7 @@ class VirtualCardService
     public function setRoleAsName(VCard $vcard, VCardData $data): void
     {
         $vcard->add('FN', 'PRM - ' . $data->getEmployee()->getRoleValue());
-        $vcard->add('F', [
+        $vcard->add('N', [
             $data->getEmployee()->getRoleValue(),
             'PRM',
             '',
@@ -119,7 +136,7 @@ class VirtualCardService
     public function setPRMAsName(VCard $vcard, VCardData $data): void
     {
         $vcard->add('FN', 'Police Région Morges');
-        $vcard->add('F', [
+        $vcard->add('N', [
             '(Police Région Morges)',
             'PRM',
             '',

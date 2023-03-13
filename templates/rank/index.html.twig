@@ -1,39 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rank index{% endblock %}
+{% block title %}Titres et grades{% endblock %}
 
 {% block body %}
-    <h1>Rank index</h1>
+    <header>
+        <h1 class="h2">Titre et grades</h1>
+        <a href="{{ path('app.rank.new') }}" class="btn-primary btn-small">Nouveau titre ou grade</a>
+    </header>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Value</th>
-                <th>Picture</th>
-                <th>actions</th>
+                <th class="key">id</th>
+                <th>Nom</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for rank in ranks %}
             <tr>
-                <td>{{ rank.id }}</td>
-                <td>{{ rank.name }}</td>
-                <td>{{ rank.value ? rank.value|join(', ') : '' }}</td>
-                <td>{{ rank.picture }}</td>
-                <td>
-                    <a href="{{ path('app.rank.show', {'id': rank.id}) }}">show</a>
-                    <a href="{{ path('app.rank.edit', {'id': rank.id}) }}">edit</a>
+                <th class="key">{{ rank.id }}</th>
+                <td>{{ rank }}</td>
+                <td style="vertical-align: center; text-align: end">
+                    <a href="{{ path('app.rank.show', {'id': rank.id}) }}" class="btn btn-sm">Afficher</a>
+                    <a href="{{ path('app.rank.edit', {'id': rank.id}) }}" class="btn btn-sm">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun grade trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app.rank.new') }}">Create new</a>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% if card.toPrint %}
+<form method="post" action="{{ path('app.card.printed', {'id': card.id}) }}" class="form-button">
+    <input type="hidden" name="_token" value="{{ csrf_token('printed' ~ card.id) }}">
+    <button class="action-item" data-confirm="Marquer comme imprimé">
+        <span class="icon"><i data-feather="check"></i></span>
+        <span class="text" data-confirm-replace>Marquer imprimé</span>
+    </button>
+</form>
+{% else %}
+<form method="post" action="{{ path('app.card.printed', {'id': card.id}) }}" class="form-button">
+    <input type="hidden" name="_token" value="{{ csrf_token('printed' ~ card.id) }}">
+    <button class="action-item" data-confirm="Définir comme à imprimer">
+        <span class="icon"><i data-feather="printer"></i></span>
+        <span class="text" data-confirm-replace>Définir à imprimer</span>
+    </button>
+</form>
+{% endif %}

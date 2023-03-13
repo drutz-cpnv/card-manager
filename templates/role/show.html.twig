@@ -3,28 +3,46 @@
 {% block title %}Role{% endblock %}
 
 {% block body %}
-    <h1>Role</h1>
-
-    <table class="table">
-        <tbody>
+    <h1 class="h2 title-header"><a href="{{ path('app.role.index') }}" class="btn-back"> <i data-feather="chevron-left"></i></a> {{ role }}</h1>
+    <div class="layout-sidebar">
+        <table>
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ role.id }}</td>
+                <th class="mono key">id</th>
+                <td class="mono">{{ role.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ role.name }}</td>
+                <th class="mono key">Nom</th>
+                <td class="mono">{{ role.name }}</td>
             </tr>
             <tr>
-                <th>Value</th>
-                <td>{{ role.value ? role.value|join(', ') : '' }}</td>
+                <th class="mono key">Non définit</th>
+                <td class="mono">
+                    {{ role.value[0] }}
+                </td>
             </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app.role.index') }}">back to list</a>
-
-    <a href="{{ path('app.role.edit', {'id': role.id}) }}">edit</a>
-
-    {{ include('role/_delete_form.html.twig') }}
+            <tr>
+                <th class="mono key">Féminin</th>
+                <td class="mono">
+                    {{ role.value[1] }}
+                </td>
+            </tr>
+            <tr>
+                <th class="mono key">Masculin</th>
+                <td class="mono">
+                    {{ role.value[2] }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="stack">
+            <div class="action-container block">
+                <a href="{{ path('app.role.edit', {'id': role.id}) }}" class="action-item">
+                    <span class="icon"><i data-feather="edit-2"></i></span>
+                    <span class="text">Modifier</span>
+                </a>
+                {{ include('role/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

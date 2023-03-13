@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Employee{% endblock %}
+{% block title %}Modifier {{ employee }}{% endblock %}
 
 {% block body %}
-    <h1 class="h4"><a href="{{ path('app.employee.index') }}" class="btn-back"> <i data-feather="chevron-left"></i> </a> Modifier {{ employee }}</h1>
+    <h1 class="h4"><a href="{{ path('app.employee.show', {id: employee.id}) }}" class="btn-back"> <i data-feather="chevron-left"></i> </a> Modifier {{ employee }}</h1>
 
     {{ include('employee/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 {% endblock %}

@@ -1,28 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}Fonctions{% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <header>
+        <h1 class="h2">Fonctions</h1>
+        <a href="{{ path('app.role.new') }}" class="btn-primary btn-small">Nouvelle fonction</a>
+    </header>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Value</th>
-                <th>actions</th>
+                <th class="key">id</th>
+                <th>Nom</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for role in roles %}
             <tr>
-                <td>{{ role.id }}</td>
+                <th class="key">{{ role.id }}</th>
                 <td>{{ role.name }}</td>
-                <td>{{ role.value ? role.value|join(', ') : '' }}</td>
-                <td>
-                    <a href="{{ path('app.role.show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('app.role.edit', {'id': role.id}) }}">edit</a>
+                <td style="text-align: end">
+                    <a href="{{ path('app.role.show', {'id': role.id}) }}" class="btn btn-sm">Afficher</a>
+                    <a href="{{ path('app.role.edit', {'id': role.id}) }}" class="btn btn-sm">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +33,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app.role.new') }}">Create new</a>
 {% endblock %}

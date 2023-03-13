@@ -1,0 +1,24 @@
+<div class="p-card">
+    <div class="p-card__photo" style="background-image: url('{{ vich_uploader_asset(employee) }}')"></div>
+    <div class="p-card__details">
+        <a href="#" class="c-details__roleType" data-tooltip="<small>Colonne de la base de donnée</small><br><code>roleType</code>">
+            {#<div class="__tooltip">
+                <div class="text-small">Base de donnée</div>
+                <code class="">role_type</code>
+            </div>#}
+            {{ card.roleType }}
+        </a>
+        <a href="#" class="c-detail">
+            {{ card.rank }}
+        </a>
+        <a href="#" class="c-details__lastname">
+            {{ employee.lastname }}
+        </a>
+        <a href="#" class="c-details__firstname">
+            {{ card.firstname }}
+        </a>
+        <a href="#" class="c-detail">
+            {{ card.role }}
+        </a>
+    </div>
+</div>

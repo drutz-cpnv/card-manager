@@ -1,57 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Card index{% endblock %}
+{% block title %}Cartes{% endblock %}
 
 {% block body %}
-    <h1>Card index</h1>
+    <header>
+        <h1 class="h2">Cartes</h1>
+    </header>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Role</th>
-                <th>Rank</th>
-                <th>Number</th>
-                <th>Birthdate</th>
-                <th>Picture</th>
-                <th>Uid</th>
-                <th>Legal_text</th>
-                <th>Role_type</th>
-                <th>To_print</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>Rank_picture</th>
-                <th>actions</th>
+                <th class="key">id</th>
+                <th>Titre/grade</th>
+                <th>Prénom</th>
+                <th>Nom de famille</th>
+                <th>
+                    <span class="text-muted text-small">Identifiant Unique</span><br>
+                    UID
+                </th>
+                <th>À imprimer</th>
+                <th>Date de création</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for card in cards %}
             <tr>
-                <td>{{ card.id }}</td>
+                <th class="key">{{ card.id }}</th>
+                <td>{{ card.rank }}</td>
                 <td>{{ card.firstname }}</td>
                 <td>{{ card.lastname }}</td>
-                <td>{{ card.role }}</td>
-                <td>{{ card.rank }}</td>
-                <td>{{ card.number }}</td>
-                <td>{{ card.birthdate ? card.birthdate|date('Y-m-d') : '' }}</td>
-                <td>{{ card.picture }}</td>
                 <td>{{ card.uid }}</td>
-                <td>{{ card.legalText }}</td>
-                <td>{{ card.roleType }}</td>
                 <td>{{ card.toPrint ? 'Yes' : 'No' }}</td>
-                <td>{{ card.createdAt ? card.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ card.updatedAt ? card.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ card.rankPicture }}</td>
-                <td>
-                    <a href="{{ path('app.card.show', {'id': card.id}) }}">show</a>
-                    <a href="{{ path('app.card.edit', {'id': card.id}) }}">edit</a>
+                <td>{{ card.createdAt ? card.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+                <td class="flex flex-end" style="gap: 8px">
+                    <a href="{{ path('app.card.show', {'id': card.id}) }}" class="btn btn-sm">Afficher</a>
+                    <a href="{{ path('app.card.edit', {'id': card.id}) }}" class="btn btn-sm">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="16">no records found</td>
+                <td colspan="16">Aucune carte trouvée</td>
             </tr>
         {% endfor %}
         </tbody>

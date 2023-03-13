@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Data\VCardData;
 use App\Entity\Card;
 use App\Entity\Employee;
+use App\Form\CardType;
 use App\Form\EmployeeType;
+use App\Form\VirtualCardType;
 use App\Repository\CardRepository;
 use App\Repository\EmployeeRepository;
 use App\Service\CardService;
 use App\Service\VirtualCardService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +39,7 @@ class EmployeeController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $employeeRepository->save($employee, true);
 
-            return $this->redirectToRoute('app.employee.index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app.employee.show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('employee/new.html.twig', [
@@ -71,7 +75,7 @@ class EmployeeController extends BaseController
         ]);
     }
 
-    #[Route('/{id}/nouvelle-carte', name: 'app.employee.create_card', methods: ['GET'])]
+    #[Route('/{id}/nouvelle-carte', name: 'app.employee.create_card', methods: ['GET', 'POST'])]
     public function createCard(Request $request, Employee $employee, CardService $cardService, EntityManagerInterface $em, CardRepository $cardRepository): Response
     {
         if(!$this->isGranted('CARD_CREATE', $employee)) {
@@ -80,23 +84,41 @@ class EmployeeController extends BaseController
         }
 
         $card = $cardService->create($employee);
-        $cardRepository->save($card, true);
+
+        $form = $this->createForm(CardType::class, $card);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $cardRepository->save($card, true);
+            return $this->redirectToRoute('app.employee.show', ['id' => $employee->getId()], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->render('employee/create_card.html.twig', [
             'employee' => $employee,
-            'card' => $card,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}/carte-virtuelle', name: 'app.employee.create_vcard', methods: ['GET', 'POST'])]
     public function getVCard(Request $request, Employee $employee, VirtualCardService $virtualCardService): Response
     {
-        $virtualCardService->create($employee);
-        $card = Card::createFromEmployee($employee);
+        $data = VCardData::createFromEmployee($employee);
+        $form = $this->createForm(VirtualCardType::class, $data);
+        $form->handleRequest($request);
 
-        return $this->render('employee/create_card.html.twig', [
+        if ($form->isSubmitted() && $form->isValid()) {
+            $vcard = $virtualCardService->create($data);
+
+            $path = 'cards/'.time().'.vcf';
+            file_put_contents('cards/'.time().'.vcf', $vcard->serialize());
+            $file = new File($path);
+
+            return $this->file($file);
+        }
+
+        return $this->renderForm('employee/create_vcard.html.twig', [
             'employee' => $employee,
-            'card' => $card,
+            'form' => $form,
         ]);
     }
 

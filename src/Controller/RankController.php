@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Data\RankData;
 use App\Entity\Rank;
+use App\Form\RankImageType;
 use App\Form\RankType;
 use App\Repository\RankRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,10 +59,28 @@ class RankController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $rankRepository->save($rank->updateFromData($data), true);
 
-            return $this->redirectToRoute('app.rank.index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app.rank.show', ['id' => $rank->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('rank/edit.html.twig', [
+            'rank' => $rank,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/modifier-image', name: 'app.rank.edit_picture', methods: ['GET', 'POST'])]
+    public function editImage(Request $request, Rank $rank, RankRepository $rankRepository): Response
+    {
+        $form = $this->createForm(RankImageType::class, $rank);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $rankRepository->save($rank, true);
+
+            return $this->redirectToRoute('app.rank.show', ['id' => $rank->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('rank/image_edit.html.twig', [
             'rank' => $rank,
             'form' => $form,
         ]);

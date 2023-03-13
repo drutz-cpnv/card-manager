@@ -26,6 +26,12 @@
   margin-inline: auto;
 }
 
+.card-md {
+  @extend %card;
+  max-width: 700px;
+  margin-inline: auto;
+}
+
 .flat-card{
   @extend %card;
   border-radius: 10px;

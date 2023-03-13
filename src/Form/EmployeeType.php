@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EmployeeType extends AbstractType
@@ -32,7 +33,10 @@ class EmployeeType extends AbstractType
             ->add('role')
             ->add('phone_number')
             ->add('email')
-            ->add('pictureFile', VichImageType::class)
+            ->add('pictureFile', VichFileType::class, [
+                'download_label' => false,
+                'required' => false
+            ])
             ->add('badge_number')
             ->add('isPolice')
         ;

@@ -8,8 +8,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: RankRepository::class)]
+#[Vich\Uploadable()]
 class Rank
 {
     #[ORM\Id]
@@ -26,11 +31,23 @@ class Rank
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[Vich\UploadableField(mapping: "ranks", fileNameProperty: "picture")]
+    #[Assert\File(mimeTypes: [
+        "image/png",
+        "image/jpg",
+        "image/jpeg",
+        "image/svg+xml",
+    ])]
+    private ?File $pictureFile = null;
+
     #[ORM\OneToMany(mappedBy: 'rank', targetEntity: Employee::class)]
     private Collection $employees;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $abbreviation = [];
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updated_at = null;
 
     public function __construct()
     {
@@ -115,6 +132,21 @@ class Rank
         return $this;
     }
 
+    public function setPictureFile(File $file = null): self
+    {
+        $this->pictureFile = $file;
+
+        if ($file) {
+            $this->setUpdatedAt(new \DateTimeImmutable('now'));
+        }
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
     public function getPicture(): ?string
     {
         return $this->picture;
@@ -170,6 +202,18 @@ class Rank
     public function setAbbreviation(?array $abbreviation): self
     {
         $this->abbreviation = $abbreviation;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

@@ -1,13 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Rank{% endblock %}
+{% block title %}Modifier {{ rank }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Rank</h1>
-
-    {{ include('rank/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app.rank.index') }}">back to list</a>
-
-    {{ include('rank/_delete_form.html.twig') }}
+    <h1 class="h4 md"><a href="{{ path('app.rank.show', {id: rank.id}) }}" class="btn-back"> <i data-feather="chevron-left"></i> </a> Modifier {{ rank }}</h1>
+    {{ include('rank/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 {% endblock %}

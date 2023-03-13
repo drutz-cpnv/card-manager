@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+<div class="hstack mb2">
+<div class="p-card">
+    <div class="p-card__photo" style="background-image: url('{{ vich_uploader_asset(employee) }}')"></div>
+    <div class="stack" style="--gap: 1">
+        {{ form_row(form.rank) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.role) }}
+    </div>
+    <div class="stack" style="width: 100px; --gap: 1">
+        {{ form_row(form.number) }}
+        {{ form_row(form.roleType) }}
+    </div>
+</div>
+<div class="p-card">
+    <div class="grid">
+        {{ form_row(form.uid) }}
+        {{ form_row(form.legalText) }}
+        {{ form_row(form.toPrint) }}
+    </div>
+</div>
+</div>
+<button class="btn-primary">Confirmer</button>
+{{ form_end(form) }}

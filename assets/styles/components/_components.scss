@@ -11,3 +11,43 @@
 @import "alert";
 @import "actionContainer";
 @import "dataList";
+@import "phyCard";
+
+[data-tooltip] {
+  position: relative;
+  .__tooltip {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: space(1);
+    width: 200px;
+    background-color: var(--gray-800);
+    padding: space(1);
+    color: var(--gray-400);
+    border-radius: 10px;
+    pointer-events: none;
+
+    &:has(code) div {
+      padding-inline: 4px;
+    }
+
+    div {
+      margin-bottom: space(.5);
+      font-size: 12px;
+    }
+
+    code {
+      color: #fff;
+    }
+  }
+}
+
+code {
+  font-family: "JetBrains Mono", monospace;
+  padding: 3px 4px;
+  border-radius: 4px;
+  text-decoration: underline solid #fff;
+  font-size: 14px;
+  display: inline-block;
+}

@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1 class="h2 title-header"><a href="{{ path('app.employee.index') }}" class="btn-back"> <i data-feather="chevron-left"></i></a> {{ employee }}</h1>
-    <div class="card-md layout-sidebar">
+    <div class="layout-sidebar">
         <table>
             <tbody>
             <tr>
@@ -16,12 +16,24 @@
                 <td class="mono">{{ employee.id }}</td>
             </tr>
             <tr>
+                <th class="mono key">Titre/grade</th>
+                <td class="mono">{{ employee.rankValue }}</td>
+            </tr>
+            <tr>
                 <th class="mono key">Prénom</th>
                 <td class="mono">{{ employee.firstname }}</td>
             </tr>
             <tr>
                 <th class="mono key">Nom de famille</th>
                 <td class="mono">{{ employee.lastname }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Fonction</th>
+                <td class="mono">{{ employee.roleValue }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Police</th>
+                <td class="mono">{{ employee.isPolice ? 'Oui' : 'Non' }}</td>
             </tr>
             <tr>
                 <th class="mono key">Matricule</th>
@@ -40,10 +52,6 @@
                 <td class="mono">{{ employee.email }}</td>
             </tr>
             <tr>
-                <th class="mono key">Police</th>
-                <td class="mono">{{ employee.isPolice ? 'Oui' : 'Non' }}</td>
-            </tr>
-            <tr>
                 <th class="mono key">Date de création</th>
                 <td class="mono">{{ employee.createdAt ? employee.createdAt|date('d/m/Y H:i:s') : '' }}</td>
             </tr>
@@ -53,15 +61,15 @@
             </tr>
             <tr>
                 <th class="mono key">Genre</th>
-                <td class="mono">{{ employee.gender }}</td>
+                <td class="mono">{{ employee.genderName }}</td>
             </tr>
             </tbody>
         </table>
         <div class="stack">
             <div class="action-container">
-                <h4>Versions</h4>
+                <h4>Cartes</h4>
                 {% for card in employee.cards %}
-                    <a href="#" class="action-item">
+                    <a href="{{ path('app.card.show', {'id': card.id}) }}" class="action-item">
                         <span class="icon"><i data-feather="chevron-right"></i></span>
                         <span class="content">
                             <span class="text">Carte de police</span>

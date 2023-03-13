@@ -1,13 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Card{% endblock %}
+{% block title %}Modifier une carte{% endblock %}
 
 {% block body %}
-    <h1>Edit Card</h1>
+    <h1 class="h4"><a href="{{ path('app.card.show', {id: card.id}) }}" class="btn-back"> <i data-feather="chevron-left"></i> </a> Modifier la carte de {{ card.employee }}</h1>
 
-    {{ include('card/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app.card.index') }}">back to list</a>
-
-    {{ include('card/_delete_form.html.twig') }}
+    {{ include('card/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 {% endblock %}

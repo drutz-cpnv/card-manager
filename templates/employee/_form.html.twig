@@ -1,7 +1,7 @@
 <div class="card p3">
     {{ form_start(form) }}
     <section class="stack-large">
-        <section>
+        <section class="stack">
             <div class="grid">
                 {{ form_row(form.rank) }}
                 {{ form_row(form.firstname) }}
@@ -11,9 +11,11 @@
                 {{ form_row(form.role) }}
                 {{ form_row(form.phone_number) }}
                 {{ form_row(form.email) }}
-                {{ form_row(form.pictureFile) }}
                 {{ form_row(form.badge_number) }}
                 {{ form_row(form.isPolice) }}
+            </div>
+            <div class="stack">
+                {{ form_row(form.pictureFile) }}
             </div>
         </section>
         <section>

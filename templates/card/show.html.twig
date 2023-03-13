@@ -3,76 +3,85 @@
 {% block title %}Card{% endblock %}
 
 {% block body %}
-    <h1>Card</h1>
+    <h1 class="h2 title-header"><a href="{{ path('app.card.index') }}" class="btn-back"> <i data-feather="chevron-left"></i></a> Carte de {{ card.employee }}</h1>
+    <div class="layout-sidebar">
+        <table>
+            <tbody>
+            <tr>
+                <th style="min-width: 200px">Employé</th>
+                <th><a href="{{ path('app.employee.show', {'id': card.employee.id}) }}">{{ card.employee }} <i data-feather="link-2"></i></a></th>
+            </tr>
+            <tr>
+                <th class="mono key">Photo</th>
+                <td class="mono"><img src="{{ vich_uploader_asset(card.employee) }}" style="width: 175px" alt="{{ card.employee }}"></td>
+            </tr>
+            <tr>
+                <th class="mono key">Id</th>
+                <td class="mono">{{ card.id }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">
+                    UID <br>
+                    <div class="text-small text-muted">Identifiant unique</div>
+                </th>
+                <td class="mono">{{ card.uid }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Titre/grade</th>
+                <td class="mono">
+                    <img src="{{ asset('pictures/ranks/'~card.rankPicture) }}" style="height: 100px" alt="Insigne du grade">
+                    {{ card.rank }}
+                </td>
+            </tr>
+            <tr>
+                <th class="mono key">Prénom</th>
+                <td class="mono">{{ card.firstname }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Nom de famille</th>
+                <td class="mono">{{ card.lastname }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Fonction</th>
+                <td class="mono">{{ card.role }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Type de fonction</th>
+                <td class="mono">{{ card.roleType }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Matricule</th>
+                <td class="mono">{{ card.number ?? "Pas de matricule" }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Texte légal</th>
+                <td class="mono">{{ card.legalText }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">À imprimer</th>
+                <td class="mono">{{ card.toPrint ? 'Oui' : "Non" }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Date de création</th>
+                <td class="mono">{{ card.createdAt ? card.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="mono key">Dernière modification</th>
+                <td class="mono">{{ card.updatedAt ? card.updatedAt|date('d/m/Y H:i:s') : 'Aucune modification enregistrée' }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="stack">
+            <div class="action-container block">
+                <a href="{{ path('app.card.edit', {'id': card.id}) }}" class="action-item">
+                    <span class="icon"><i data-feather="edit-2"></i></span>
+                    <span class="text">Modifier</span>
+                </a>
+                {{ include('card/_printed_form.html.twig') }}
+                {{ include('card/_delete_form.html.twig') }}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ card.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ card.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ card.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Role</th>
-                <td>{{ card.role }}</td>
-            </tr>
-            <tr>
-                <th>Rank</th>
-                <td>{{ card.rank }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ card.number }}</td>
-            </tr>
-            <tr>
-                <th>Birthdate</th>
-                <td>{{ card.birthdate ? card.birthdate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ card.picture }}</td>
-            </tr>
-            <tr>
-                <th>Uid</th>
-                <td>{{ card.uid }}</td>
-            </tr>
-            <tr>
-                <th>Legal_text</th>
-                <td>{{ card.legalText }}</td>
-            </tr>
-            <tr>
-                <th>Role_type</th>
-                <td>{{ card.roleType }}</td>
-            </tr>
-            <tr>
-                <th>To_print</th>
-                <td>{{ card.toPrint ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ card.createdAt ? card.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ card.updatedAt ? card.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Rank_picture</th>
-                <td>{{ card.rankPicture }}</td>
-            </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
 
-    <a href="{{ path('app.card.index') }}">back to list</a>
-
-    <a href="{{ path('app.card.edit', {'id': card.id}) }}">edit</a>
-
-    {{ include('card/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

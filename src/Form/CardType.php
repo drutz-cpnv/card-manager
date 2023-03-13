@@ -4,7 +4,10 @@ namespace App\Form;
 
 use App\Entity\Card;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,25 +20,26 @@ class CardType extends AbstractType
             ->add('lastname')
             ->add('role')
             ->add('rank')
-            ->add('number', null, [
-                'label' => 'Badge number'
-            ])
-            ->add('birthdate' ,null, [
-                'widget' => 'single_text'
+            ->add('number', NumberType::class, [
+                'label' => 'Badge number',
+                'required' => false
             ])
             ->add('uid', null, [
                 'help' => "Unique Identifier"
             ])
-            ->add('legal_text', null, [
-                'help' => 'This text appears on the back of the card and defines the rights and powers conferred by the card on its holder.'
+            ->add('legalText', TextareaType::class, [
+                'help' => 'Ce texte apparaît au dos de la carte et définit les droits et attributions que confère la carte à son détenteur en fonction de son rôle au sein de la PRM.',
+                'attr' => [
+                    'style' => 'min-height: auto;'
+                ]
             ])
-            ->add('role_type', ChoiceType::class, [
+            ->add('roleType', ChoiceType::class, [
                 'choices' => [
                     'Civil' => 'Civil',
                     'Police' => 'Police'
                 ]
             ])
-            ->add('to_print')
+            ->add('toPrint', CheckboxType::class)
         ;
     }
 

@@ -58,11 +58,11 @@ class RoleController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $roleRepository->save($role->updateFromData($data), true);
 
-            return $this->redirectToRoute('app.role.index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app.role.show', ['id' => $role->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('role/edit.html.twig', [
-            'role' => $data,
+            'role' => $role,
             'form' => $form,
         ]);
     }

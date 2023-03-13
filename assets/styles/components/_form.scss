@@ -7,7 +7,7 @@ label, legend {
 }
 
 input:disabled {
-  opacity: 0.7;
+  background: var(--button-active-background);
 }
 
 // Honeypot
@@ -28,6 +28,28 @@ input:disabled {
 .form-group textarea,
 .form-group select,
 %input {
+  background: #f5f5f5;
+  border-radius: 6px;
+  border: 1px solid #d4d4d4;
+  box-shadow: 0 1px 0 0 #d4d4d4;
+  color: #262626;
+  //cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 5px 10px;
+  //white-space: nowrap;
+  width: 100%;
+
+  &:active, &:focus{
+    background-color: var(--background);
+    box-shadow: none;
+    transform: translateY(1px);
+  }
+
+
+  /*
   border: 2px solid var(--border);
   background: var(--background);
   border-radius: 7px;
@@ -36,7 +58,7 @@ input:disabled {
   display: block;
   width: 100%;
   outline: none;
-  min-height: 48px;
+  min-height: 48px;*/
 }
 
 .form-group textarea{
@@ -73,8 +95,13 @@ input:disabled {
   -moz-appearance: none;
   appearance: none;
   background-size: 12px 12px;
-  background-position: center right 20px;
+  background-position: center right 10px;
   background-repeat: no-repeat;
+}
+
+.form-group:has(> .form-check) {
+  padding-top: space(2.8);
+  justify-content: center;
 }
 
 .form-group select:not([multiple]) {
@@ -88,48 +115,63 @@ input:disabled {
 }
 .form-check {
   cursor: pointer;
-  position: relative;;
+  position: relative;
 }
+
 .form-check input {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
+
 .form-check label {
   cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   margin: 0 !important;
+  position: relative;
+  padding-left: space(3);
+  user-select: none;
 }
 
 .form-check label::before {
   content: '';
+  background: #f5f5f5;
+  border-radius: 6px;
+  border: 1px solid #d4d4d4;
+  box-shadow: 0 1px 0 0 #d4d4d4;
   display: inline-block;
+  position: absolute;
+  left: 0;
   width: 18px;
   height: 18px;
-  margin-top: -1px;
-  border: 1px solid var(--border);
+  margin-top: -2px;
+  //border: 1px solid var(--border);
   background: var(--background);
   //margin: 0;
   margin-right: space(1);
 }
+
 .form-check label::after {
   transition: transform 0.2s;
   content: '';
-  position: absolute;
-  top: calc(50% - 7px);
-  left: 4px;
-  width: 10px;
+  width: 5px;
   height: 10px;
-  margin: 0;
-  background: var(--contrast);
   transform: scale(0);
+  rotate: 30deg;
+  border-right: 2px solid #343a40;
+  border-bottom: 2px solid #343a40;
+  position: absolute;
+  left: 6.5px;
+  top: 1.5px;
 }
 .form-check input:checked + label::after {
   transform: scale(1);
 }
+
+.form-check input:checked + label::before {
+  background-color: #f5f5f5;
+}
+
 .form-check input::after {
   content: '';
 }
@@ -232,7 +274,7 @@ textarea:focus,
 form button:focus,
 input:focus + label .switch,
 %input-active {
-  border-color: var(--contrast);
+  //border-color: var(--contrast);
 }
 
 // Misc
@@ -270,14 +312,6 @@ button:not([class]):hover .icon-delete {
     cursor: pointer;
   }
 
-  &.is-checked {
-    border-color: var(--contrast);
-  }
-
-  &.is-checked::after {
-    background: var(--contrast);
-  }
-
   input {
     opacity: 0;
     cursor: pointer;
@@ -299,14 +333,6 @@ button:not([class]):hover .icon-delete {
 
   &::after {
     border-radius: 2px;
-  }
-
-  &.is-checked {
-    border-color: var(--contrast);
-  }
-
-  &.is-checked::after {
-    background: var(--contrast);
   }
 }
 

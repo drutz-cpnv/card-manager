@@ -126,6 +126,11 @@
   line-height: auto;
 }
 
+.h1.md, .h2.md, .h3.md, .h4.md, .h5.md {
+  width: 700px;
+  margin-inline: auto;
+}
+
 small, .text-small {
   font-size: .9em;
 }

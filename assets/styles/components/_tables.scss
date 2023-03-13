@@ -18,6 +18,12 @@ table .btn {
   padding: 5px 15px;
   white-space: nowrap;
 
+  &:active{
+    background: var(--button-active-background);
+    box-shadow: none;
+    transform: translateY(1px);
+  }
+
   &.btn-sm {
     font-size: 12px;
     line-height: 20px;
@@ -39,8 +45,9 @@ table thead th.key, table tbody td.key {
 }
 
 table thead th.key {
-  width: 35px;
+  width: 50px;
 }
+
 
 table tbody td.key, table tbody th.key {
   color: var(--gray-600);
@@ -109,6 +116,14 @@ table tbody tr {
 
 table tbody tr:last-of-type th, table tbody tr:last-of-type td {
   border-bottom: 0;
+}
+
+table a {
+  color: var(--primary);
+
+  svg {
+    height: 15px;
+  }
 }
 
 /*

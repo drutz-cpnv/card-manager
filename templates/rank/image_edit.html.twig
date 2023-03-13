@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'image de {{ rank }}{% endblock %}
+
+{% block body %}
+    <h1 class="h4 md"><a href="{{ path('app.rank.show', {id: rank.id}) }}" class="btn-back"> <i data-feather="chevron-left"></i> </a> Modifier l'image du grade {{ rank }}</h1>
+    <div class="card-md p3">
+        {{ form_start(form) }}
+        <section class="stack-large">
+            <section>
+                <div class="stack">
+                    {{ form_row(form.pictureFile) }}
+                </div>
+            </section>
+            <section>
+                <button type="submit" class="btn-gradient">Enregister</button>
+            </section>
+        </section>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
